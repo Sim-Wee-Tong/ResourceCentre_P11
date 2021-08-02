@@ -39,5 +39,7 @@ public class Item {
 	public void setIsAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
+	
+	//comments by Desmond Lee
 }
 
