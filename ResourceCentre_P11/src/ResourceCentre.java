@@ -12,7 +12,7 @@ public class ResourceCentre {
 		ccList.add(new Camcorder("CC002", "Panasonic HC-MDH2", 10));
 		cbList.add(new Chromebook("CB001", "ASUS Chromebook ", "Win 10"));
 		cbList.add(new Chromebook("CB002", "HP Chromebook", "Win 10"));
-
+		
 		int option = 0;
 
 		while (option != 5) {
@@ -124,23 +124,23 @@ public class ResourceCentre {
 	}
 
 	//================================= Option 1 View (CRUD - Read) =================================
-	public static String retrieveAllCamcorder(ArrayList<Camcorder> camcorderList) {
+	public static String retrieveAllCamcorder(ArrayList<Camcorder> ccList) {
 		String output = "";
 
-		for (int i = 0; i < camcorderList.size(); i++) {
+		for (int i = 0; i < ccList.size(); i++) {
 
-			output += String.format("%-10s %-30s %-10s %-10s %-20d\n", camcorderList.get(i).getAssetTag(),
-					camcorderList.get(i).getDescription(), 
-					ResourceCentre.showAvailability(camcorderList.get(i).getIsAvailable()),
-					camcorderList.get(i).getDueDate(),camcorderList.get(i).getOpticalZoom());
+			output += String.format("%-10s %-30s %-10s %-10s %-20d\n", ccList.get(i).getAssetTag(),
+					ccList.get(i).getDescription(), 
+					ResourceCentre.showAvailability(ccList.get(i).getIsAvailable()),
+					ccList.get(i).getDueDate(),ccList.get(i).getOpticalZoom());
 		}
 		return output;
 	}
-	public static void viewAllCamcorder(ArrayList<Camcorder> camcorderList) {
+	public static void viewAllCamcorder(ArrayList<Camcorder> ccList) {
 		ResourceCentre.setHeader("CAMCORDER LIST");
 		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "ASSET TAG", "DESCRIPTION",
 				"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
-		 output += retrieveAllCamcorder(camcorderList);	
+		 output += retrieveAllCamcorder(ccList);	
 		System.out.println(output);
 	}
 
@@ -175,9 +175,9 @@ public class ResourceCentre {
 		return cc;
 		
 	}
-	public static void addCamcorder(ArrayList<Camcorder> camcorderList, Camcorder cc) {
+	public static void addCamcorder(ArrayList<Camcorder> ccList, Camcorder cc) {
 		
-		camcorderList.add(cc);
+		ccList.add(cc);
 		System.out.println("Camcorder added");
 	}
 	
@@ -197,19 +197,19 @@ public class ResourceCentre {
 	}
 	
 	//================================= Option 3 Loan (CURD- Update) =================================
-	public static boolean doLoanCamcorder(ArrayList<Camcorder> camcorderList, String tag, String dueDate) {
+	public static boolean doLoanCamcorder(ArrayList<Camcorder> ccList, String tag, String dueDate) {
 		
 		boolean isLoaned = false;
 
-		for (int i = 0; i < camcorderList.size(); i++) {
+		for (int i = 0; i < ccList.size(); i++) {
 			
-			String assetTag = camcorderList.get(i).getAssetTag();
+			String assetTag = ccList.get(i).getAssetTag();
 			
 			if (tag.equalsIgnoreCase(assetTag)				
-					&& camcorderList.get(i).getIsAvailable() == true) {
+					&& ccList.get(i).getIsAvailable() == true) {
 				
-				camcorderList.get(i).setIsAvailable(false);
-				camcorderList.get(i).setDueDate(dueDate);
+				ccList.get(i).setIsAvailable(false);
+				ccList.get(i).setDueDate(dueDate);
 				
 				isLoaned = true;
 				
@@ -218,11 +218,11 @@ public class ResourceCentre {
 		return isLoaned;
 	}
 
-	public static void loanCamcorder(ArrayList<Camcorder> camcorderList) {
-		ResourceCentre.viewAllCamcorder(camcorderList);
+	public static void loanCamcorder(ArrayList<Camcorder> ccList) {
+		ResourceCentre.viewAllCamcorder(ccList);
 		String tag = Helper.readString("Enter asset tag > ");
 		String due = Helper.readString("Enter due date > ");
-		Boolean isLoaned =doLoanCamcorder(camcorderList, tag, due);
+		Boolean isLoaned =doLoanCamcorder(ccList, tag, due);
 		if (isLoaned == false) {
 			System.out.println("Invalid asset tag");
 		} else {
@@ -266,14 +266,14 @@ public class ResourceCentre {
 		
 	}
 	//================================= Option 4 Return (CURD- Update)=================================
-	public static boolean doReturnCamcorder(ArrayList<Camcorder> camcorderList,String tag) {
+	public static boolean doReturnCamcorder(ArrayList<Camcorder> ccList,String tag) {
 		boolean isReturned = false;
 
-		for (int i = 0; i < camcorderList.size(); i++) {
-			if (tag.equalsIgnoreCase(camcorderList.get(i).getAssetTag())
-					&& camcorderList.get(i).getIsAvailable() == false) {
-				camcorderList.get(i).setIsAvailable(true);
-				camcorderList.get(i).setDueDate("");
+		for (int i = 0; i < ccList.size(); i++) {
+			if (tag.equalsIgnoreCase(ccList.get(i).getAssetTag())
+					&& ccList.get(i).getIsAvailable() == false) {
+				ccList.get(i).setIsAvailable(true);
+				ccList.get(i).setDueDate("");
 				isReturned = true;
 				
 			}
@@ -282,10 +282,10 @@ public class ResourceCentre {
 		
 	}
 
-	public static void returnCamcorder(ArrayList<Camcorder> camcorderList) {
-		ResourceCentre.viewAllCamcorder(camcorderList);
+	public static void returnCamcorder(ArrayList<Camcorder> ccList) {
+		ResourceCentre.viewAllCamcorder(ccList);
 		String tag = Helper.readString("Enter asset tag > ");
-		Boolean isReturned = doReturnCamcorder(camcorderList, tag);
+		Boolean isReturned = doReturnCamcorder(ccList, tag);
 		
 		if (isReturned == false) {
 			System.out.println("Invalid asset tag");
