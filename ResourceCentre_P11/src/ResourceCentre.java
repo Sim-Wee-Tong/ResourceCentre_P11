@@ -47,7 +47,7 @@ public class ResourceCentre {
 				} else {
 					System.out.println("Invalid type");
 				}
-
+// test
 			} else if (option == 3) {
 				// Loan item
 				ResourceCentre.setHeader("LOAN");			
